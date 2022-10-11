@@ -1,0 +1,42 @@
+[service]
+name = "www"
+
+[service.provider]
+name = "aws-lambda"
+
+[service.provider.options]
+aws_region = "us-east-1"
+
+[api]
+domain_name = "demos.asml.akkoro.io"
+is_root = true
+
+[[api.functions]]
+name = "server"
+language = "rust"
+size_mb = 1792 # 1vCPU
+
+[api.functions.http]
+verb = "GET"
+path = "/{path+}"
+
+[[api.functions]]
+name = "counter"
+language = "ruby"
+size_mb = 3584 # 2 vCPU
+http = { verb = "POST", path = "/api/counter/{ip}" }
+authorizer_id = "iam"
+
+[[api.authorizers]]
+id = "iam"
+auth_type = "AWS_IAM"
+
+[[iomod.dependencies]]
+coordinates = "akkoro.std.http"
+version = "0.3.0"
+type = "registry" # AWS deployment requires type to be `registry`
+
+[[iomod.dependencies]]
+coordinates = "akkoro.aws.secretsmanager"
+version = "0.1.0"
+type = "registry" # AWS deployment requires type to be `registry`

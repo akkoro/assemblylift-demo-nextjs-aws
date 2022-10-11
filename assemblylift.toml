@@ -1,0 +1,12 @@
+[project]
+name = "nextjs"
+
+[[services]]
+name = "www"
+
+[[domains]]
+dns_name = "demos.asml.akkoro.io"
+[domains.provider]
+name = "route53"
+[domains.provider.options]
+aws_region = "us-east-1"
