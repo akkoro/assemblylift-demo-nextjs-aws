@@ -90,7 +90,7 @@ exports a single function named `request` at `akkoro.std.http.request`.
 ### Next Frontend
 There is no specific convention for adding a frontend to AssemblyLift; in this project we have created the [`frontend`](frontend/) directory to mimic the [`services`](services/) directory. Here we have used `create-next-app` to create a Next.js project called [`www`](frontend/www/) after our service of the same name.
 
-The frontend must be exported to a static site, using `next build && next export`. The contents of the generated `out` directory are copied into the server binary when it is compiled (on `asml cast`).
+The frontend must be exported to a static site, using `next build && next export`. The contents of the generated `out` directory are compressed into the server binary when it is compiled (on `asml cast`).
 
 ## Deploy your own!
 You can deploy this project yourself! You will need to update it to use your own domain of course ;)
@@ -107,6 +107,6 @@ Nice to have:
 
 An AssemblyLift project is built with the `asml cast` command; _casting_ is the process of compiling WASM, transpiling TOML, building images, etc which comprises the build of an application. Artifacts and plans are serialized to the `net/` directory.
 
-The frontend build is currently handled outside of the AssemblyLift tooling. You will need to `cd` to `frontend/www/` and run `npm install` and `npm run build`. The `out/` directory **must** exist for the `server` function to compile!
+The frontend build is currently handled outside of the AssemblyLift tooling. You will need to `cd` to `frontend/www/` and run `npm install` and `npm run build`. The `frontend/www/out/` directory **must** exist for the `server` function to compile!
 
 To deploy a project you use the command `asml bind`, which will deploy artifacts and apply the underlying Terraform plan.
